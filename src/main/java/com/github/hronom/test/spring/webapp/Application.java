@@ -1,4 +1,4 @@
-package com.github.hronom.test.spring;
+package com.github.hronom.test.spring.webapp;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
