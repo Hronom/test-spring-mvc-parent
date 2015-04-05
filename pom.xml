@@ -13,6 +13,14 @@
         <java.version>1.7</java.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jcenter-snapshots</id>
+            <name>jcenter</name>
+            <url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.tomcat</groupId>
@@ -99,6 +107,11 @@
             <groupId>org.apache.taglibs</groupId>
             <artifactId>taglibs-standard-jstlel</artifactId>
             <version>1.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mangofactory</groupId>
+            <artifactId>swagger-springmvc</artifactId>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -223,6 +236,33 @@
                     <workingDirectory>${project.basedir}/bin</workingDirectory>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>2.3.4</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <locations>com.github.hronom.test.spring.webapp.components.configurations;com.github.hronom.test.spring.webapp.components.controllers;com.github.hronom.test.spring.webapp.components.services;com.github.hronom.test.spring.webapp.pojos</locations>
+                            <apiVersion>v1</apiVersion>
+                            <basePath>http://example.com</basePath>
+                            <swaggerDirectory>${project.basedir}/bin/swagger-ui</swaggerDirectory>
+                            <supportSpringMvc>false</supportSpringMvc>
+                            <outputPath>${project.basedir}/bin/swagger-ui/generated/document.html</outputPath>
+                            <!--<outputTemplate>${project.basedir}/bin/swagger-ui/templates/strapdown.html.mustache</outputTemplate>-->
+                            <!--<mustacheFileRoot>${project.basedir}/bin/swagger-ui/templates/</mustacheFileRoot>-->
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>

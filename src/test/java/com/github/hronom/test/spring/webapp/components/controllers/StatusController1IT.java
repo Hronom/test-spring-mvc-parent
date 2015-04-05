@@ -1,4 +1,4 @@
-package com.github.hronom.test.spring.webapp;
+package com.github.hronom.test.spring.webapp.components.controllers;
 
 import com.github.hronom.test.spring.webapp.components.configurations.WebAppConfig;
 import com.github.hronom.test.spring.webapp.components.services.MainManager;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebAppConfig.class}, loader = AnnotationConfigWebContextLoader.class)
-public class StatusControllerIT {
+public class StatusController1IT {
     private MockMvc mockMvc;
 
     @Autowired
@@ -35,27 +35,27 @@ public class StatusControllerIT {
     }
 
     @Test
-    public void test1() throws Exception {
+    public void testV1() throws Exception {
         mockMvc.perform(
             get("/status").accept("application/" + MainManager.serviceName + ".1.0+json")
                 .characterEncoding("UTF-8")
         ).andDo(print()).andExpect(status().isOk()).andExpect(
             content().contentType(
                 "application/" + MainManager.serviceName +
-                ".1.0+json;charset=UTF-8;charset=UTF-8"
+                ".1.0+json;charset=UTF-8"
             )
         ).andExpect(content().json("{\"status\":true}"));
     }
 
     @Test
-    public void test2() throws Exception {
+    public void testV2() throws Exception {
         mockMvc.perform(
             get("/status").accept("application/" + MainManager.serviceName + ".2.0+json")
                 .characterEncoding("UTF-8")
         ).andDo(print()).andExpect(status().isOk()).andExpect(
             content().contentType(
                 "application/" + MainManager.serviceName +
-                ".2.0+json;charset=UTF-8;charset=UTF-8"
+                ".2.0+json;charset=UTF-8"
             )
         ).andExpect(content().json("{\"status\":true}"));
     }

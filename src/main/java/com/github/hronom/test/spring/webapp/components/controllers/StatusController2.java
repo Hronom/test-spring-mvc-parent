@@ -14,37 +14,29 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Rest controller with "url versioning".
+ */
 @RestController
-@RequestMapping(value = "/status", method = {RequestMethod.GET})
-public class StatusController {
+public class StatusController2 {
     private static final Logger logger = LogManager.getLogger();
 
     @Resource(name = "MainManager")
     private MainManager mainManager;
 
-    @RequestMapping(headers = {
-        "accept=application/" + MainManager.serviceName + ".1.0+json;charset=UTF-8"
-    })
+    @RequestMapping(value = "/v1/status", method = {RequestMethod.GET})
     public
     @ResponseBody
-    Status status1(
-        @RequestHeader("Accept") String accept, HttpServletResponse response
-    ) {
-        logger.debug(accept);
+    Status statusV1(HttpServletResponse response) {
         Status status = new Status();
         status.setStatus(mainManager.status);
         return status;
     }
 
-    @RequestMapping(headers = {
-        "accept=application/" + MainManager.serviceName + ".2.0+json;charset=UTF-8"
-    })
+    @RequestMapping(value = "/v2/status", method = {RequestMethod.GET})
     public
     @ResponseBody
-    Status status2(
-        @RequestHeader("Accept") String accept, HttpServletResponse response
-    ) {
-        logger.debug(accept);
+    Status statusV2(HttpServletResponse response) {
         Status status = new Status();
         status.setStatus(mainManager.status);
         return status;
