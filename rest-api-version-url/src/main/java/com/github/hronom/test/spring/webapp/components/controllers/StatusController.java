@@ -27,6 +27,7 @@ public class StatusController {
     @ResponseBody
     Status statusV1() {
         Status status = new Status();
+        status.setText("Hello API V1");
         status.setStatus(mainManager.status);
         return status;
     }
@@ -36,6 +37,7 @@ public class StatusController {
     @ResponseBody
     Status statusV2() {
         Status status = new Status();
+        status.setText("Hello API V2");
         status.setStatus(mainManager.status);
         return status;
     }
